@@ -1,331 +1,179 @@
-const RAW_INPUT_DEMO = `be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
-edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
-fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg
-fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb
-aecbfdg fbg gf bafeg dbefa fcge gcbea fcaegb dgceab fcbdga | gecf egdcabf bgf bfgea
-fgeab ca afcebg bdacfeg cfaedg gcfdb baec bfadeg bafgc acf | gebdcfa ecba ca fadegcb
-dbcfg fgd bdegcaf fgec aegbdf ecdfab fbedc dacgb gdcebf gf | cefg dcbef fcge gbcadfe
-bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbgef
-egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
-gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce`;
+const RAW_INPUT_DEMO = `2199943210
+3987894921
+9856789892
+8767896789
+9899965678`;
 
-const RAW_INPUT_DEMO2 = `acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf`;
+const RAW_INPUT = `3567891987643457898879876567896543567999831045697654564567923989994345678987678789732349887675978921
+2458910976432179987568965456789732679898753234598753213459205978989234899875467679549498765434569530
+0199891987651099999699864346678901236799874447679832102398919867879345698685353568998999654323678991
+9987689997543988942987954244599932345679975998799993219987998756567956796543212457896898765512356789
+8876599898759867899876543123989893456893989899998789398996789645458967989954563568965989997434667990
+6932465779998656789998756439876799578902398799987678987975696532367898979797678979654979876598798991
+4321234569876549896569968998765698989653998698994569876564589643456799867689989989769865987679899989
+5210156789965323597459879998874587898769896587989678995323578956567989754567891299879954598789998979
+4321345899876434589567999987923456789899765445678999986414789967979876543488910198998767679899987867
+6632397965987545678999999876212345693987654323567912398924567899899989764579329977899879795967986459
+9543989894299866789987898754101656892198765214568903459435898979798999875789998756989999893456796598
+8759878792101979897676987643212567894239899399979214567986789765687989989899889549878989901349987986
+9898765689212591987565698654323459964349978987899935978999897654245678996947679698769979932598999995
+9998654569423492989434599765434567895598867456987899899423987542134599875434568989654667894987987894
+9789743458975989876325989976545678987697656349896798778912499651013987997645679876543458965976876792
+8698652456896978965439879898876799398789543298775986567893599973129876798958893976402979976965345891
+7597543467899767896998965679998895479997652109654323479994989984234984589767912993213567899879866920
+6498794698998457989876534569999976569876543299865212569989876797545999679878929854323989924989977891
+2379898789876345678921024678987898789987856987654323457976545987659898989999798769574567899798989999
+4456999899765456889532125699896789898698997899765434567899432398798767897535699998765689987657492478
+5578999921996567897656236989765678987569798999876645698957921239987656789649987659977799998743201367
+7689689890989688998798759876524589765456659789987786789546890149876545699898999543989999876543212457
+8994598799878999339899767998435678976342345678998987893435789349765434569976898932395699987654326568
+9012987643456797123902979876549889887201956889769698942329895467976787678954967891234989999965437679
+2179876732367896014594989988659997654319899998754569321018799578998998789123456789349879899896548989
+4359865321298965123689892198768999766598678997653698932147678989859999896346569896498765789789679997
+9498763210245954349799651099978989898976567896542987654234567898745899965487978976569654345678998986
+8987654321239895498987543987989679999432459789693498765445679997656789876568999987698786467789987545
+7899875434398789987898659876594568987991234678989999876656789998769897988979989998789987578999876434
+6531989546497678976549898765423679876789545789767898987987898999878976599989879989999898999767997645
+7432397659986568997932999976512398544897656899959987598998987999989765322398769879898769456989498867
+6543498798775457889431098987624987632369767929898976439569976789999854310989654766789654349894329978
+7654569987656345579943987698899764321248978909797895323457895678929875929876543245678921235789412399
+8765679976542136467899876559987654320136799998676789214568954567919989899877610176899420126897543999
+9876889987431012349913987432199766872345789987545795323459543456798998769754321398999321247897659897
+2989999987542123567899877643019898953489899876436989435678954597897899659876432345678992348998798765
+3599989997654344567998765432123989876578998765425678956999978989986899543989546797789989459359899954
+4698979998865455878939998765234568987989987654314567997896989876775678932397656898899978978998999965
+5997767899876666789323459654345689798995498765323456789985398765434567891239789999998768999887989876
+9865456912987989895457998767858789649689349986465589899965269894323788910199898989987659998766578997
+8754319899899198998667919898969891234589237697877679998764356983212669921989976878999846899542467898
+9865456789765347899778929999989910346679104598999897659975569862101457899876795467897656987431298999
+9976777895986456799899998999998434457895323679876998943498778954212345678965789346789879876540139898
+8998998954987567897956987678976595978965455789765689899999899965323486789654567999897999987621998786
+6659989543298998965344986567897989899876576897643476798789939876765797899865678987986567898749876545
+5349867994039579999123975456789876789998697976532365698699421987978998949878989896575456899656987634
+3298756889123459878939765345998765699998789765431234986578932398989459134989898765452345698768999523
+2197545678939967967899874239877674578939899998420125987899543999797678999795698654321246789879998434
+3986434567897899879997985645965432349649989987531349998935959898689789987654239765530124578999997645
+4994323978976799989876976759878653468998767987642498989129898769456998998562123987641436789999898867
+9875413899765689998765987868989965678987957899999987778998799954349887789421045699532647999789769978
+9975326789984568949984398979099876789896548789878996567897659895459765678932156798743498987698754989
+9875435689965989239876239989299987999765435699767423456998946789569874567893278897659999999549865998
+5987749899899892049954345799989998998843323789654312599899834596978983479954399998998789899432977897
+4597656998754679198765456789879789976532012698943201987689656975989994567895989879549697678953989945
+3498767899843598939876567899765679865432124567895329876598967894699865678999876768998546568964590234
+4569878978932467921987798999654578987543236689997435985467899943457988789998765449876323479987689345
+7699999568901357890298899998843459899854457899876557897589965432356799899989854333985454567999789499
+8789123479953456789349912997672699689765698912987668987699975431234898999976543212987565678999899978
+9893234567894568997999439876531987578976899993498789098967896945949987678998765323498686789889999867
+9965445679965678996788998987610398689987901989569892199656789899898796569999965434569797895678998756
+8987896893496889985437987896321239789998999778999943987547898788789653467899879545679898934789349432
+7898987942987999876545976895434549899999987656789994976432987656679732567893989698789999655891296551
+6799898931998979998959875689545856999889976543499989984521298645578901246932198799898789867932987867
+5689769649899758789879754678956767897679865431299878993210985432459913459951099912987678979999898978
+4569998798799645678998763456968978987567987320987656789929976421567895598892989893976568999989769989
+3498899899698934569898542347899999995439876459876545677898797533678999976789576789865459789878943294
+2376789987566899689797655458987999986320998767966431256789698754789998764593445899879345698767892102
+1235999987345678998659778969895498765421239978954310137996549965898889865692136901998976789456789264
+2348969876459799997549889879789329876432357989876521245894321986987678976789029212987897891347894395
+3467942987578899998634999989699567999943569795987432656789210197896546987899198933986789930456989989
+4578931298689999899324799996588989987894698654599545867895423298965434699998987899865578921239879879
+7679549499895398765435678965466898776895987542349657978999564569876986792397976798783467893398767956
+8989698989943239986586889984345789654997899651298789989398979678998997891986545987632348965459854543
+9998797678987458997697999875235799843689998910129891093297898999549049992398939876543567896598753652
+6789986569896567989788987654356999754567897953256992129986767896432135689987824987654578987965432101
+4579995445789879878999998976999898975678976894345789998765456798743546798776501298765989599876543213
+3498986323589998968999989899878667896799875799556999899654345689656787987654312349989795467989754354
+4987691012478987657898878789765456987899864678977898798765467899867899898766423756799654367899875565
+5986543123567898946997654598654347998998743457898997679877568999998998769987534678978975256789988677
+6987663248678999858987643569876767899597652368999876565989678989899987645697685989769976347999899898
+7999854357789998767896542354989898976439763578998765424598789878678987656789876999659899869999789919
+8998765469899949878989750123498969598929854689129873213659897654598998767895987898998789979898678901
+9999879879999832999679971334597653469898765793234964302349953212387899878934699987987678997657567992
+9987989989998721023457895499989432598789976789549875463598764301256789989123459876543589876545456789
+8876899999987652134568999978678921997678998999799986654789975432345897993234567989542499987632345689
+7654698989998543245979987856567939876567999102989899865678987543456976789345679898743459876721234678
+8769987678987654346789996543459899987679789212976799976989398764689565678956789789954698765430123569
+9998798582399765458898775432376789899889678929865689987993109865789454567899898697895899876521234567
+3987654341349878579997654321235679765994569998654567898943212978894313456789976546896999989632376789
+2498765210234989678998976492346789654323458999765679979764323989932102568999975435987898799843497997
+4569886345695699899899989989959996543212356998986889768975434598754213479239894326798936598765567896
+5699997556789789924689999877898799754901239897899997656899545679865674589998732107989323459877678965
+6789898767899891013579888765789678969892398776798965345678959789996786679876545212378901266988789323
+7998759978912942125698769434134567898789997654357893257789768999989899789987687354567892345699899212
+9876532199909943286789654321023678987679876543234789357899879239878998990298798865679943466789978994
+2987694367898765497898765432335789989467989862125678969987989498657897892989899976789955577895456789
+3498986456789976567959876543566899865346995993013489878976597987545656789864945989898766698934349899
+6569297678992988798943998678797897643219864987654899989497456986531248999943239899919897979210245678
+9791098989321099899532109899899998856424965699766789994398577895432346898765356789323998964323345789`;
 
-const RAW_INPUT = `ec cabfe afebd dbagef afbcg feabcd cdef eafdcbg ecb caegdb | ceb ecb febac ec
-acfdg ea baec dgbafec cfebg efa cfebgd dfbaeg egcaf abecfg | bgcdfe ebac cadgf dceagfb
-gfed caefd dcegaf ge daegc bcdag dfagbce cfbead gce afbegc | ceadg edfg gdbca fcead
-ea dgfcae feba cae efbcagd cagfb gedcb gbfcad gebca afbceg | facbgde cegdbaf cgabe degcb
-gcbfed bdf cbdfgea fgeabc dcfab caefb db caebdf abde fgdca | fdb fabce dbacf afceb
-bacf afg egfab dcbgef bcegdaf efgbac efcgda fa gbfce gebad | edgba bfacged af fdacbeg
-adgef bagcf cdea adfebg dfgca adfgec cd fcdgbe cdf cdfegab | afgdbe facdg gdfbeac dcea
-cdgeb cd cdb gfecbda adgcbe bcdfag aecd bfceg edbfga agdbe | bdc dbeacg dceabg gcedb
-ae cdbeg gefcdb eca ebgfac dcbafeg deag abcde facbd becadg | aec cbaedg aec deag
-gabfc cdfbe ea dbcfeag aebfgc befagd ebfac aeb gaec bagdfc | ea gbadfc dgbfca decbf
-bcad cd cfbge cegabdf fcdeb defabc gebadf fdc adfbe ecadfg | dc fcd egdcfa dc
-begcda cbf egacb fc ebcaf baefd gabdfc gfce gaecfb acgdfeb | bdegfca cf fc acbdeg
-fbgce dagcbe eafcbg bcgdfe geacdfb efdb dcgaf dge de gfdec | cgbfe bagced daecbgf bfde
-fdgae fce cdeab gcfd fc efdca eadfgb fcgdae efdcbag gaefcb | efbdag fgeda adbfeg befagc
-cfag cadgfb cf cfd cdbgf gaebdc bgfde cgbfead befacd cadbg | gcbda fcd bfged dcf
-gebf edbcga edcabgf cfabed aeg agcfeb fgaec ge cgadf ebafc | abcgdfe gafbce cfagbe bgfe
-aegbfcd gbacef bfea bfg efcag cfbge bf fcdega bedgc gbacfd | bcagedf bfea acdbefg faceg
-dcf df aedf ebacf egabfcd fcdbge acfbd adbgc dfabec afgceb | caebf dcf dcf ebcagf
-bgad abcge dbcfgae bcfae gecdab eagcfd ag cgdbe gae bcedfg | adbg gdba ga aeg
-cega begfdca bdcfea febcg bec fbadcg fgbeac ec bfgac fgbed | ec gadbfc cbgfa bgcadef
-fegbac debg bgc cadbg gdefca efbagcd dbgcea dfbca caegd bg | gb edgbcaf gbc cbg
-gbefc badecfg acgeb ecfgba cfbgd bef ef acbged caebdf afeg | gefa ecdbafg gbdfc cegfb
-gbefca gcdba dbfeag ec gbfae becf gdafce fegadcb aegcb aec | gebafc befcga gfadbe cgeab
-cegadf cafg gdeca fdbcae fadcgbe gdc gc cbefdg ebgad fcdea | acdef gbcdef agcf cgbdaef
-gcdbef eagdbc ecbdg afecgb bfc fbecd geabfdc fb fbgd fdcae | bcf cfdegba fb dfcbe
-gafed badfce db dcgb dab dbaeg dgafceb acegb cabedg aebgcf | afdge db bcgaed cbaefd
-bgcda gdfb fecbda gb cbg bafcgd gacbdef bfeagc cbafd dagce | gadec cgb efgdacb gdacb
-cbefd dfegba bcfead db aebcfdg deacf bdf dbac fcbeg geadcf | gbefda efacd bd dfb
-agdfbe gfcbeda egcad cegbd bgafce gcfead gfade acfd ac cea | afdge eac gaefd cdega
-ebfad fde edbca gbfdce feag gaebfd ef adgfb bgcfad cbdfgae | gfabdc edf fage cdabe
-bdce cefabdg bafdge afced cd cad badfce gdbfac aefcg ebdaf | ecagf bedc dac dc
-cgebf gba ecadb ebcdfa gcad adgcbfe dbecga ga gbeca eagbdf | ag bfgec ag cdbeaf
-dbcf dgecf ebcgd gbcea gebdcf bed dfacbge gceadf ebafgd bd | db dbe faecdbg dbe
-gdea fed aedbf efadgb de fbega bgaecf gaecbdf egbcdf cdfab | ed cfeabg aged dgecabf
-afebc fdeacb egf cfgb daceg egbcaf cafge gf ebadcfg egfbda | fge afceb eacfg agecd
-ecfad deabcf cagfe gc degfca dgcf dabcge gac gabcefd ebfag | cga afgce gdfc agc
-eac gbaec cfeb acefgb afebg ce dacbg bdegaf egafdc bgceafd | eadcfgb aec ace aec
-gefba afb af gacbe ecbgaf dagfcb feca deabgc fbdceag dfbge | befdcga aegfbc efbcag baf
-bdg ecdgf fbagc ebdafg db cbgfd cebd baegcfd fedcag dcegbf | db eacfdbg bdce bd
-cfeab ebdgca agb ga aecbg cgda eafgdb ebcgdf cbfaegd dgbce | cbdfega ecafb gdac bga
-caed gcdfa ac bfcedg edagfc eabcfg caf dagcfbe gbfda dfcge | degfacb fbcaged cfa dgafbce
-bgcefda eagdbf acdbe gdfbe abgf aedcfg cedfbg fea fdeab fa | aef bcead fgbdae abfdeg
-cbd cgdaeb gaebd dfceg cgbde cbefgda bfcgda eafbgd cbae bc | baegd bc aceb gbdeca
-fbaegc dcbaf dbcae abcfg adbcegf bcdfga dfa cdfg fgdaeb df | fcgaedb fd fd begcaf
-bcdeg ea fbaegdc eag eafgbc dgaeb bgafdc feda adbfg gdabfe | gdbea eag ea aeg
-beacfd bead dafce cea edfagcb ea gadfc bfecd aecfgb fcdbeg | ae cgefab adcef aebd
-dcefgb agfdce bgdfe agfdbe fad bdafe ceadb fa fbag dgcafbe | abefd ebfdgac fa dbgef
-cbdfg cgeabfd fe fge bfgdca gfacde becgdf bdef ebcga egbfc | ef bgfcaed egbfc gaebcfd
-adcge fcad bagced cf cef fegcd edacgbf cafegd febgd aecgbf | fec agefdc dacf egcabdf
-fagbd bgec fdcbea be eacgf eba dceafg faebg adbecfg baefgc | gfcaedb ebfga bea fabgd
-dbecfa bfcga begdfa cgdebf ge fge gbcef cegd dcfeabg fdceb | cbegfad eg gdec bgacf
-cae ebcf ce gcfad bdefag fcaeg cgfdbae abdegc acbgef faegb | fegac ec cdgaf bcaedgf
-bcfae cbgedf agdfcbe gdca fgc gcdfba bagfd gbafed gc bgafc | fcg edfbcga feadgbc adgc
-cfdgab fdg dbcfa gf efgdac afgdb decagfb edfbca cgbf abged | fagdceb bdagf cebdgaf edcbaf
-bcefg bafge ebadgfc cfe ec dcgfb bafgec edbgfa caeg dcebfa | afgeb cefbga dcbgf fegba
-fbc gbced edcbfg fb dbgf befgc fgace degabc bcafdeg fbaced | aefgcbd fedagbc bfc fb
-gd gbd eabfcdg egad cgbda eagbc cdgabe feabgc dcebgf adbfc | cadfbeg daeg bcgefa gd
-edafb dagfb agd ecbgda dgbfc edgbcf fcga geafbdc cfdbga ag | gcfa gda gfdebca gda
-edabg bcafgd gacfd dgfcae bfa fb dafbecg edcfab fgbc dafgb | fba fdcgeab fb badge
-ebfd gbdaef gafcbe efadg agfdb bf gcadbfe fab cbdga cfgead | fab aebgfcd fb debf
-geadcf cadgfb ab cbagf acgdf dfcegab adbcge fbgec abfd abc | acfdeg acgfdb bcfga dgcfa
-dacfbe cbga ebdfga bc ecbfadg agfeb ecgfd bfc eagcfb bfegc | fecdab cfegb bfecg decgf
-cgdabf ecdfab ecgf ecfdb bgf febgcd gf gdbef abged gdefbac | afgcdb gefc gf adfcgbe
-cgda gcfedb cbdage aedfbgc cd cgaebf eadbc bceag dbc defba | abgedc cdb cdb fgcebda
-dafbgce agd fcdage gd afecg edgc egabfc efdab dabgfc afedg | beafgc dgec gad gecd
-dbgecf faedbg dgfea dacfge fcaed dagc dc dfc febca abfgced | fedag dfeagc dgfacbe cd
-fbgc gcbadf dafcg gdaeb gfdace bf bafgd defbca bfa gfbecda | fba fb cgfb cfdabg
-abfceg adgfbe cba cfea cbega abgef dbfgca ca cebgd ebgdafc | ac ca acb bca
-bafg decfa feabdg cafbged ga gea fgedb dbcage fadge fedbgc | eacdgb ega bfga cefbdg
-cbafg fe debga bgfea ecfa efb dfbegc afcbdg fbecga dcgbfea | bgdfcae fcbga bgaecf fe
-gdfa eagbc gdc bdfeca cdfbga dg afcdebg cagbd bfdceg fbcad | dgaf dg dgc cgd
-egbcdf gdbeafc fcd cafde abfdge adfebc gecda fbead fc bcfa | dagce gdaefbc cf fdc
-eca cgafdb afeb gecba febdgca gadfce fcagb ea dbceg cgbfea | cafegd cae ecbdfag cgbea
-ge cfbead abefgc acfbe ceafdg fbge abcge badgc gec caefbgd | efbca egc dbgafec dafbgec
-dc gaefc deafgb fdc dfeba adbc efdca dfgacbe fdegcb dcbafe | fcd afecg efcgbda feadb
-dcbfe bfe efdacb afcebg cebda gcefd afgbcde bdfa fb edbcag | gecdf fb bfe bf
-ecbfa febagc bf dbagfe edgcab fcgdeab afb eacgb ecafd gcfb | acbefg gaebdc cgbf fbcage
-begcda fcedba gadefbc cgeaf dce bfdc dacfe cd afebd abedgf | ecdabg gdfeba afbcged afgcbde
-ae ebcgd dcfgaeb becagd dbeacf afbgc ecbag eca gcbdfe edag | cea becga gbecad ae
-cgbafed geafdc ebacfg cde bdcfg gfced dafe acfeg ed agdbce | daef eafd edc cfegd
-fdceag ecdabgf bfgcd fgdba fag daebg beaf af egcabd daefgb | afdcebg beaf af dfegbca
-bc caeb adgfcb gfbde aedgcf gefabc adcfgeb bgc fagce cfegb | bc cb fegca bc
-agecbd gaefbc gefdc bgfdac bdgca ae age edabgcf decga edab | dacefgb dafgecb ega ae
-egbad debfa dfag bgaecf abgdce fba fa cgbefad agedfb cdbef | fgbead fagd becgda af
-bgc edgbfca bfgce agdcfe acgefb efcbd cafeg bg bage bagfdc | gb bgea bgcef dcbef
-gab cfeab gdcea facgbe adbfcg cafdebg dfaceb begac egfb gb | dcgfba bg gb bag
-bgfceda gcafed egfd eadcg abgdce gfaec bdfagc eabfc gf fgc | egdf agdce cgf cafged
-bacfegd egbad adgce adcb dbagec acgfed bag ba ebdfg gafebc | bacdeg badc efgbdac bdac
-bfcdg bdgcfe cfb cb becd gfdec eacgdf bfecgad fbgda cfegab | cbf bfc cb cafbegd
-cebgf gbeda fa fedcab cdegfb cgbeaf bafdegc fgeab eaf gcfa | gcebfd fagcebd af fcga
-cefba eg fecbag adebcg aebcdgf dbagf cgef abecdf egb fgaeb | fadceb bafcegd bfeac gcfe
-acgd fadgb edcfbga afgcbd cdfbe gc bfgdc cfg gfaecb ebgfad | cbdgefa bfaecgd bfcaedg fcdeb
-dgbe aedbcfg bfegdc agcbdf dcgfe fcdgb fed ed efbcad efgca | edgb fgcbd bdge edgb
-gfadc geacf gdf fd dgafcb gaecbd bdcag cgdebf bafd fdbaceg | bedgacf gdebfc fbagced fdba
-dcbefa eadfbcg ab eadcg fegbda dba fgebd gabf gbcdfe bdage | afbg bfcdae bgaf bda
-cbf cf edgcba fdcabg ebgdf gacdb bgfcea cgbdf fbgecda acdf | egdbf fc fbc fdbagc
-ebdcgf edgba ef afce aefgdc edf edfag bcagdf gfaebdc gfdca | def edcgaf fdeagc fe
-bdaef fbcgae ae dcae dgcfab fbcda bae dbgfe badcgef dfeacb | aeb cbgfae bafced ae
-ebacf gebfa gbfaed edfga bg ebdg edgacf bdcafg gba cgabefd | abg edgb dgbe fecabdg
-faged ba gaefb abcf abfecg gefbc edagcb dafbcge gab cbfegd | ba gfbae gbadfce cabdgfe
-dbag cgdbe ebg dbaefc gebcfa geabcd daebgfc gfdce dbeca gb | abdg bg geb gebadc
-bcegda egcd ecfgdba edagb dgfbea abcfd cg bgacd ebgfca gcb | efgabc bgeda degc egadbc
-bagecfd geadbf debaf dfge abegf fecbga fbd df abfgcd edabc | cbefgad faegdb dfebga df
-ecdabf gbdfa eabfc bedc cdf gcfaebd cgbfea cd dfagce abfcd | dcaegf becd cd dbfcea
-egac fdabce faedg fdceag gfe dgafb defac daecfbg ge bgdecf | geafd fcdea cedgaf gbfceda
-facebgd ebcgaf afecdb eba egaf ae cdegb agfbc bdfcag bgeac | ecgbd egfa ea fgae
-dgfbce dfa fbedga bgadf cdgab af gefa aecdbf ebfdg bafgcde | febdg fega acbfdge abefdg
-bcdae aebcg dacf gefbda cbefd badcegf begfdc adb ad efcbad | ad adcf acfdbe bad
-fgbcda dgcfeab gdcae fabge dgb bdfgea bd adbeg bceagf fbed | bgd db db bd
-dgb cbfgaed bdeafc bfacdg gbdef gd agde adfeb dbgafe fgceb | egbafdc bagefd egda agde
-fegbdc eabfgd edfbgac ad fdgbe bade agcfe gadef dfa dacfgb | da eadb dgfae ad
-dbfag fbgac adfeg cfdb gdbeca dab fcabdg db ebgfca gecabfd | adb bgceadf dfaeg cgaefbd
-ebgca ecdbfa bcafg ge cgbefad agde edbca geb ebdcgf dgabce | bdcfgae ebg ge bge
-gcadbef fgbd gcd gd aecgb bcdefg afdebc cbfde afcdeg dcebg | gcd dgc gdc befacd
-fdabge ab gdeca fagcbed gba dgbefc eafb bgcfda gdbae fgdeb | adceg abef efab eafb
-cfgdba cd abecd cfbadge dcb adbfe agfbde bcafde egabc dcfe | aecdb defbag eadfbc dc
-dgcaeb acfdbg ge dgecfb gdbecaf gace aedbf adbcg dge gbdea | edabf cgdfbe eg dgaeb
-egbfac ceg geacd ecbda ebgd dbceag dbgcfea dbacef gadfc ge | egc dcbaegf acfgd aegbdc
-gd fcgbad abegdf gbed feabcd acdfgbe efacg gfead feadb fdg | dg egcfa aedgf ebdcaf
-gf defcg gefb gfecdb fgc ebacgfd gbdcfa facedb ebfcd degca | efbg eadbfgc fgc fgecbd
-acgfb febgda dgfabec fa fab gdeacb eafc cbgdf fbegac ebgca | af acef beagfc fcbga
-fb fbec dgacbef fagecd fabdeg fbdcg dgecf fegbdc bdf bagcd | cebf fb efcb fb
-ebgfc cbefdg adgfbc edbfg gadfbce fbd adebg fd gbfeac efcd | fd dfegbca bgecfa df
-ceafd abdfc dbgcf gdaecb eabcdf cegfda abfe abd ba cbefadg | ab edfac fbea cegdfab
-bgdce aedfbc agecb egfcad ab abe cafge gbefca bfcgaed abgf | acbeg cgeabf ecafgd fdgabec
-faegd eb fabe efbdag egb fgbed cbgdea dcfgb cbgefad gfecad | adbgcef agfed ebg fbegda
-agbcd cfgabe gca dfcegab agdbf gc gdfc dbfcga eacdb faedgb | cbafdg abdce fdbga cabfgde
-bdaec bfgde ga agdbce gdca gceafbd abdeg gae cfabeg edacfb | deacb adgbcfe becda ecagdbf
-efagdcb edgbac bfcea cfagb dfecb bae fagcbe aefg ea cdafbg | afge afge dcebgfa fega
-bgaec geadb fgbdec gefdba fbacg cbdage aedc gce dfaegcb ec | ecg adec acfdgbe cdae
-egad dgcbf fcbeag eg cgaedf ceafd cbfead cegfd acfgbde cge | fgdec afdbce fbecda gefbcad
-cdegb dbea gbdcae dgfecab febcga cbaeg ed fdbgc cde cadfeg | dce ecd adgbec gbacef
-efbgdca cbafg gfdbce egbafd ecbaf ag gadc abgfdc bag gcfbd | bcgfd ag gebafd gabfed
-gfac gfdbca gba degbc bcfad agdbfe ebdgcfa efcadb ag bdgca | aebgfcd afecbd gab acgbedf
-dfeagc ecfd abegdc bcdfga eca geacf fgacebd gfeab ce dgcfa | bgcfda egcaf dfbcaeg agefb
-efbdag ecgbaf dcgafb dacbe fdgacbe dfgc df fda acbdf cgbfa | fda afbgc cdabgf df
-edcagb bdgac eagb ga bcgfd ecdab acgefd cafedb abgefdc dag | ag gbdca ga bgcda
-dafbecg cgead fcbd agbedf db bde becad cbeaf bfgeac dfbeca | abgefd fecba fbcd cbdf
-edg bfdace agebc ebdcf dgfabe cbged dg bgdefc gdcf bdgceaf | fcgd fdcg fdcg ged
-fcabd bcde dfcbaeg efdbac cfbage bdfag fadec afecdg cb bca | cfdea dabfec cbafeg dafce
-gbeafd agcb cefbg gdaecf bg gbf bcdfe fceag bagcef afecdgb | gb efgadb cgab caefg
-cegbadf gaed dcafeg feacg gd fcbagd dgfec bfegca gcd cebdf | gd gd aecfdg cgd
-gfecd gedba dceagbf fdage gedafc afd fcbgad becdfg feac af | cgdeafb fgcebda edgaf gfedca
-fdbgcea fedbgc agdcfe debcag deba bcgde dga bfcga dcabg ad | dcagb cfgbdae dcgebfa dbae
-abd debcfg caegdb da bcafgd acdf ebgfa fagcedb gabfd fbdcg | bgefa da cgdefb edcgabf
-ea fgace egafbc dfegabc fbae fgcbe cegbad ega dbcfge gdacf | bfea cgdfa ea bdacfge
-ecba eadcg eb edb fbagd gdcebf gbceda dacfge gbaed fagdbec | aefgcd bdceafg gbfdeac afdgb
-ed dgeb dfacbg dbcgf gbdcfae efbdgc dec deafcg bfaec efdbc | fbgdce gadbfec fdgcbe gadfce
-dgec gafbcde bcgdfa dacefg efcda cegaf acd cegafb cd eafdb | gaecdfb fcdgae dc gdcebaf
-fdbgca abfc cbadg cf fcg edfgb cdgbae cgaedf abcefgd dcgfb | badegc cf adgceb fc
-eb fgcde bafcgd cbfeda cegdba becgd bce baeg dagcb ceabfgd | adgceb debgafc be gacdb
-ebcafd dgfeb befdgca gce egabdc adecb egdcb cbegaf gc cgda | bfaedc gbecaf egc dgbecfa
-gafdbc cfaeg aecbd efbd fcegadb fcb bacfe cagebd bf fcbade | fb bcf bdef gdeacb
-ce gedc afbdgce abdfc dcbgea cae abcde afgbec edgbfa bgade | dfaegb baced cfadebg cea
-bagf bge dfgce fdbae egadbf dgbcae fdgbe fabcgde gb facbed | bfga gfab bg gbe
-cb fabc cfedb fdcge fdbeca gedbca bce abgfdce adfeb ebfagd | cabfde abfc ebc ebcfd
-edbf bafeg cadfgb cgeab fba bf agfed cgbfaed fgacde gfbaed | cedbagf bf bf fba
-bceadgf begfac gfedab gabdcf cegf caf efgab bcade cbaef fc | efgc fbcgdae gbcfda bdgafe
-bafdg agedf dbgecaf fge dcefa bafcge ge eafbcd gcdaef egdc | eg fdcebga ecgd egf
-afbdeg abfceg ecg afgeb bfce fgcae fcadg gcdebaf ce dbcega | befag dabcgfe eagbdc egc
-fbga dabeg debcf dgafbe fea bfdea gdbfcea agcfde fa egbacd | edgfac eaf fa fae
-bafec cf cfadgb faebd bcf beacg eadgbf bdceafg cdfe dfabec | fcb afcdgb cfb bfcae
-ebfacd geafbc cgdfbe gabfd ceag cg cabfe bgcfa bgc fdeagcb | febdgc gbc gc dcefgab
-egacf cadb efdcab cfedb gfabde dea feadc decbgf fbadecg da | gcfbed acbgdfe bcedf becfad
-bfgcad cebaf fabgc afgbec egfb fe abdce efc fdagce baedcfg | fec gbfca fe bdefacg
-gbfedca bega bcdef fgeadc bgcad ea bcfgda gdcabe acdeb ace | ea dgbcae afbdcge ae
-fcadebg gbecd adc fdbag bdagc aedbfc ecgfbd ac bdceag geca | eacg cgae adc ca
-afdgec cfgdab fbedag eabcf agb cgfdeba dgeb gb afged abegf | bg fbgea badfge gdeb
-edgab adfcg cedabgf ce edbgcf daecbg ecd dgcae ebac fbgaed | ec ec ecba eagbd
-cebf eadbg bc degfbca cbg gcfbda agfce bgcae cbgfae efcdga | cbef badcfg gcb bcfe
-cafbde cbfg abgef gacedf gf edbag faedgcb bfeac gbefca fga | gcfb fceab gaf beadg
-edfab feag dag bgdfc adgbf gbfaed ga egdcabf cadgbe bacdef | gefabcd aegf afge eagf
-cdfeab cdg efdbc fcbdga dcgaebf dbge eagfc debfcg gd cgfde | fabcgde dgc egbd cgd
-cagbef gcb fbgead cfdg cbdea bdegc cg ebgdfc fgedacb bdgef | bfegda gc gc cfegdab
-edcgf be feagcd dbcfa ecbagdf bfgcea cbfged fedcb feb gbed | bef fdceg egbd bfe
-egbf fdgcab dbage edafc degabf fgd gaefd cbdage afedbcg fg | gdf acebdgf gdf gafdeb
-acfegb cabed fbdacg afb gafec gadecbf cbfae efbg bf egdfac | fegb abf cebda egfb
-caegfd faebcgd dfeag cg cafbge fbdega gca ceadg caebd fgcd | gc agc gafebc fdega
-fbgda dfebg bde eb fgdce dfegabc edcfba egbc cdbgfe faegcd | be eb dcbgfae gadbecf
-fbgadc efac ce caedb badfce bce ebadg bdgfce cdbfa fbcagde | ec ebc efac ecb
-edagcf ecdga facbeg fcdge ca begad gca bdgfcea cgdebf afdc | adcf fdgaec edcgf acg
-feacg cdfb eadfbg adcbfg bf bfg aecgdb fdgceab gcdab bcafg | gfb bcfag fb afceg
-fbdgea fcae abgecdf deafg gfceda gec cgdef gbdfc ec aecgbd | caef afec dfcgae ecaf
-geadfc afbcegd eadc abdfeg ac agdfe cgefa gac gfebc cgbfad | faedg gabfde ca eadc
-dcaeg afc ecgf edbcag fcdeba gcfdea abgfd adgcf cf dcebfga | dfegac fceg facdg afc
-fbacged egc ecfgb cegadb efdg eg efbdc bcfga deabfc bfcegd | ceg fgedbca fged eg
-bfceag egbcad debgaf dbegf febga edfgabc cdfeb gd fdag gde | egfdcba gaecfb ecdfb dagfbe
-eadfgc gc bgdfcae bgcdf fbdeac cadgbf cgd gebfd badfc cagb | gc agcfed efdcga gefadbc
-gcbe feagb caegf adfce agc cg egfbca dafbeg acfdgb acdfbge | beagf gcdafb egabf abfegd
-abfce dafcbe eg gbe fecgab agec eacgbdf gcbdf fcegb gdbaef | bgedfa geca eg bgfec
-bfadg befdgc defgb cafgeb de fced edg adgceb gacedbf bfcge | efcd bgceda de de
-efdcba efgcdb efcbd ba bae cbaf geadc afgbde decab bgecdaf | cfba daegbcf dbafec bcedgaf
-dfeab eb cgfbaed aecfgd efadgb gcdefb agbe cdbaf bfe edfag | dgeacfb cgdebf be bgae
-dcfbea dagfeb dfgceba agfdc gcef gecfad abgcd deafc gdf gf | bgacd cefg efcg dfaceg
-egfdb ecbgd fade cdfbega bfaeg gfbacd gdf df becfag dfabge | dgf geadbcf gacefdb df
-fcdbga egdabf ca bcdfa cdbef befdgac gfbda acgf adc bdgeac | aebdgc gadbfce cda dagfb
-dgce adfbecg eafcdb cfgda cfage gbafd ceafgb fcd dc aedcgf | egdcfba fcd fcadg gdbcfae
-dae dacgfe fceab fcabge cbdeg daecb ad bcadef dbfa gefcdab | geacdfb egacfb fdab da
-gcebf cdebaf gafc agbecf daebgc gcfabde cg ecg efacb edbgf | cgafdeb cegbda cg dcgeba
-befcag cefdga ebaf ba bgfcdae fcaeg ecbdg cab fdbacg aecgb | bafe cfgbda geacb acebg`;
+const parsedInput = RAW_INPUT_DEMO.split('\n').map((item) =>
+  item.split('').map((value) => +value)
+);
 
-let parsedInput = RAW_INPUT.split('\n').map((el) => el.split(' | '));
+const solvePart1 = () => {
+  const lowestLocations = getLowestLocations();
 
-const numbersToChars = {
-  1: 2,
-  4: 4,
-  7: 3,
-  8: 7,
-};
-
-const charsToNumbers = {
-  2: 1,
-  3: 7,
-  4: 4,
-  7: 8,
-};
-
-const checkLengths = () => {
-  return parsedInput
-    .flat()
-    .filter((element, index, array) => index % 2 === 1)
-    .map((item) => item.split(' '))
-    .flat()
-    .reduce((acc, current) => {
-      charsToNumbers[current.length] && acc++;
-      return acc;
+  const totalRiskLevel = lowestLocations
+    .map((item) => item.value + 1)
+    .reduce((current, acc) => {
+      return acc + current;
     }, 0);
+
+  console.log('La suma de riesgo es: ', totalRiskLevel);
 };
 
-// console.log(checkLengths());
+const getLowestLocations = () => {
+  const lowestLocations = [];
+  for (let i = 0; i < parsedInput.length; i++) {
+    for (let j = 0; j < parsedInput[i].length; j++) {
+      checkSurroundings(i, j) &&
+        lowestLocations.push({ i, j, value: parsedInput[i][j] });
+    }
+  }
+  return lowestLocations;
+};
 
 const solvePart2 = () => {
-  for (const line of sortedInput()) {
-    const [input, output] = line;
-    deduceChars(input, output);
+  const lowestLocations = getLowestLocations();
+  for (let location of lowestLocations) {
+    findBasin(location);
   }
 };
 
-const deduceChars = (input, output) => {
-  const keys = getKey(input);
-  let response = '';
-  for (let item of output.split(' ')) {
-    response += Object.keys(keys).find((key) => keys[key] === item);
+const findBasin = (location) => {
+  const rowLimit = parsedInput.length - 1;
+  const columnLimit = parsedInput[0].length - 1;
+  const basin = [];
+  for (let i = location.i; i <= rowLimit; i++) {
+    for (let j = location.j; j <= columnLimit; j++) {
+      const target = parsedInput[i][j];
+      if (target == 9) {
+        break;
+      } else {
+        basin.push(target);
+      }
+    }
   }
 };
 
-const getKey = (input) => {
-  let keys = {};
-  const splittedInput = input.split(' ');
-  keys[1] = splittedInput.find((item) => item.length === numbersToChars[1]);
-  keys[4] = splittedInput.find((item) => item.length === numbersToChars[4]);
-  keys[7] = splittedInput.find((item) => item.length === numbersToChars[7]);
-  keys[8] = splittedInput.find((item) => item.length === numbersToChars[8]);
-  const top = removeItems(keys[7], keys[1].split(''));
+const surroundings = (input, i, j) => {
+  const rowLimit = input.length - 1;
+  const columnLimit = input[0].length - 1;
+  const surroundings = [];
+  for (let x = Math.max(0, i - 1); x <= Math.min(i + 1, rowLimit); x++) {
+    for (let y = Math.max(0, j - 1); y <= Math.min(j + 1, columnLimit); y++) {
+      if (x !== i || y !== j) {
+        surroundings.push(input[x][y]);
+      }
+    }
+  }
+  return surroundings;
+};
 
-  const topRightAndBottomRight = keys[1];
-
-  const middleAndTopLeft = removeItems(keys[4], keys[1].split(''));
-  const bottomAndBottomLeft = removeItems(keys[8], [
-    ...keys[4].split(''),
-    ...top,
-  ]);
-
-  keys[9] = splittedInput.find(
-    (item) =>
-      item.length === 6 &&
-      checkIfContains(keys[4].split(''), item) &&
-      checkIfContains(top.split(''), item)
+const checkSurroundings = (i, j) => {
+  return (
+    parsedInput[i][j] ===
+    Math.min(parsedInput[i][j], ...surroundings(parsedInput, i, j))
   );
-  const bottom = removeItems(keys[9], keys[4].split('')).replace(top, '');
-  const bottomLeft = removeItems(bottomAndBottomLeft, bottom.split(''));
-  keys[3] = splittedInput.find(
-    (item) => item.length === 5 && checkIfContains(keys[1].split(''), item)
-  );
-  const topLeft = removeItems(keys[9], keys[3]);
-  const middle = removeItems(middleAndTopLeft, topLeft);
-  keys[0] = removeItems(keys[8], middle.split(''));
-  keys[6] = splittedInput.find((item) => item.length === 6 && item !== keys[9]);
-  const topRight = removeItems(keys[6], [
-    ...top,
-    ...middle,
-    ...topLeft,
-    ...bottomLeft,
-    ...bottom,
-  ]);
-  const bottomRight = removeItems(topRightAndBottomRight, topRight);
-  keys[2] = (top + topRight + middle + bottomLeft + bottom).split('').sort()
-    .join``;
-  keys[5] = (top + topLeft + middle + bottomRight + bottom).split('').sort()
-    .join``;
-  return keys;
-};
-
-const removeItems = (target, itemsToRemove) => {
-  for (let item of itemsToRemove) {
-    target = target.replace(item, '');
-  }
-  return target;
-};
-
-function checkIfContains(charsToSearch, string) {
-  return charsToSearch.every((item) => string.includes(item));
-}
-
-const sortedInput = () => {
-  return RAW_INPUT_DEMO2.split('\n')
-    .map((line) =>
-      line
-        .split(' ')
-        .map((x) => x.split('').sort().join``)
-        .join(' ')
-        .split('\n')
-        .map((item) => item.split(' | '))
-    )
-    .flat();
 };
 
 solvePart2();

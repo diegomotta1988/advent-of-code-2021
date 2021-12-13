@@ -1,4 +1,4 @@
-const RAW_INPUT_DEMO = `be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
+export const RAW_INPUT_DEMO = `be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe
 edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc
 fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg
 fbegcd cbd adcefb dageb afcb bc aefdc ecdab fgdeca fcdbega | efabcd cedba gadfec cb
@@ -9,7 +9,9 @@ bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbg
 egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
 gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce`;
 
-const RAW_INPUT = `ec cabfe afebd dbagef afbcg feabcd cdef eafdcbg ecb caegdb | ceb ecb febac ec
+export const RAW_INPUT_DEMO2 = `acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf`;
+
+export const RAW_INPUT = `ec cabfe afebd dbagef afbcg feabcd cdef eafdcbg ecb caegdb | ceb ecb febac ec
 acfdg ea baec dgbafec cfebg efa cfebgd dfbaeg egcaf abecfg | bgcdfe ebac cadgf dceagfb
 gfed caefd dcegaf ge daegc bcdag dfagbce cfbead gce afbegc | ceadg edfg gdbca fcead
 ea dgfcae feba cae efbcagd cagfb gedcb gbfcad gebca afbceg | facbgde cegdbaf cgabe degcb
@@ -209,5 +211,3 @@ dgce adfbecg eafcdb cfgda cfage gbafd ceafgb fcd dc aedcgf | egdcfba fcd fcadg g
 dae dacgfe fceab fcabge cbdeg daecb ad bcadef dbfa gefcdab | geacdfb egacfb fdab da
 gcebf cdebaf gafc agbecf daebgc gcfabde cg ecg efacb edbgf | cgafdeb cegbda cg dcgeba
 befcag cefdga ebaf ba bgfcdae fcaeg ecbdg cab fdbacg aecgb | bafe cfgbda geacb acebg`;
-
-export const parsedInput = RAW_INPUT.split('\n').map((el) => el.split(' | '));
