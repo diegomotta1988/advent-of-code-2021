@@ -47,12 +47,16 @@ const calculateScorePartTwo = (itemsToAdd) => {
   }, 0);
 };
 
-const runPartOne = () => {
-  const errors = checkLines('part1');
-  const score = errors.reduce((acc, current) => {
+const calculateScorePartOne = (errors) => {
+  return errors.reduce((acc, current) => {
     acc += SYMBOLS_AND_SCORES_PART_ONE[current];
     return acc;
   }, 0);
+};
+
+const runPartOne = () => {
+  const errors = checkLines('part1');
+  const score = calculateScorePartOne(errors);
   console.log('El resultado fue: ', score);
 };
 
