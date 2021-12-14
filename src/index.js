@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const RAW_INPUT_DEMO = `6,10
 0,14
 9,10
@@ -1063,3 +1064,5 @@ const solvePartTwo = () => {
 
 // solvePartOne();
 solvePartTwo();
+=======
+>>>>>>> 9a766da72c750fbc0ef07411014eca94959a9f16

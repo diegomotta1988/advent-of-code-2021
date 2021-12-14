@@ -12,7 +12,6 @@ const SYMBOLS_AND_SCORES_PART_TWO = { ')': 1, ']': 2, '}': 3, '>': 4 };
 const checkLines = (part) => {
   let expectedValues = [];
   let errors = [];
-  // let corruptedIndexes = [];
   let itemsToComplete = [];
   for (let line of parsedInput) {
     for (let [index, char] of line.split('').entries()) {
@@ -21,7 +20,6 @@ const checkLines = (part) => {
         expectedValues.push(OPENERS_AND_CLOSURES[char]);
       } else if (char !== expectedValue) {
         console.log(`se esperaba ${expectedValue} y se recibió ${char}`);
-        // corruptedIndexes.push(index);
         errors.push(char);
         expectedValues = [];
         break;
@@ -43,17 +41,21 @@ const checkLines = (part) => {
 
 const calculateScorePartTwo = (itemsToAdd) => {
   return itemsToAdd.reduce((acc, current) => {
-    acc += acc * 5 + SYMBOLS_AND_SCORES_PART_TWO[current];
+    acc = acc * 5 + SYMBOLS_AND_SCORES_PART_TWO[current];
+    return acc;
+  }, 0);
+};
+
+const calculateScorePartOne = (errors) => {
+  return errors.reduce((acc, current) => {
+    acc += SYMBOLS_AND_SCORES_PART_ONE[current];
     return acc;
   }, 0);
 };
 
 const runPartOne = () => {
   const errors = checkLines('part1');
-  const score = errors.reduce((acc, current) => {
-    acc += SYMBOLS_AND_SCORES_PART_ONE[current];
-    return acc;
-  }, 0);
+  const score = calculateScorePartOne(errors);
   console.log('El resultado fue: ', score);
 };
 
@@ -65,12 +67,8 @@ const runPartTwo = () => {
     scores.push(calculateScorePartTwo(item));
   }
 
-  const result = scores.sort();
-  console.log(result);
-  // const incompleteLines = [...parsedInput];
-  // while (corruptedIndexes.length) {
-  //   incompleteLines.splice(corruptedIndexes.pop(), 1);
-  // }
+  const result = scores.sort((a, b) => a - b);
+  console.log(result[Math.floor(result.length / 2)]);
 };
 
 // runPartOne();
