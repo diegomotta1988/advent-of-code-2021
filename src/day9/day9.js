@@ -1,72 +1,77 @@
-import { parsedInput } from './day9.data';
+import { lines } from './day9.data';
 
-const solvePart1 = () => {
-  const lowestLocations = getLowestLocations();
+const solvePartOne = () => {
+  let risk = 0;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    for (let j = 0; j < line.length; j++) {
+      const current = line[j];
 
-  const totalRiskLevel = lowestLocations
-    .map((item) => item.value + 1)
-    .reduce((acc, current) => {
-      return acc + current;
-    }, 0);
-
-  console.log('La suma de riesgo es: ', totalRiskLevel);
-};
-
-const getLowestLocations = () => {
-  const lowestLocations = [];
-  for (let i = 0; i < parsedInput.length; i++) {
-    for (let j = 0; j < parsedInput[i].length; j++) {
-      checkSurroundings(i, j) &&
-        lowestLocations.push({ i, j, value: parsedInput[i][j] });
-    }
-  }
-  return lowestLocations;
-};
-
-const solvePart2 = () => {
-  const lowestLocations = getLowestLocations();
-  for (let location of lowestLocations) {
-    findBasin(location);
-  }
-};
-
-const findBasin = (location) => {
-  const rowLimit = parsedInput.length - 1;
-  const columnLimit = parsedInput[0].length - 1;
-  const basin = [];
-  for (let i = location.i; i <= rowLimit; i++) {
-    for (let j = location.j; j <= columnLimit; j++) {
-      // const target = parsedInput[i][j];
-      while (i > 0) {}
-      const column = parsedInput.map((x) => x[i]);
-      // if (target == 9) {
-      //   break;
-      // } else {
-      //   basin.push(target);
-      // }
-    }
-  }
-};
-
-const surroundings = (input, i, j) => {
-  const rowLimit = input.length - 1;
-  const columnLimit = input[0].length - 1;
-  const surroundings = [];
-  for (let x = Math.max(0, i - 1); x <= Math.min(i + 1, rowLimit); x++) {
-    for (let y = Math.max(0, j - 1); y <= Math.min(j + 1, columnLimit); y++) {
-      if (x !== i || y !== j) {
-        surroundings.push(input[x][y]);
+      if (
+        (!(i - 1 >= 0) || current < lines[i - 1][j]) &&
+        (!(i + 1 < lines.length) || current < lines[i + 1][j]) &&
+        (!(j - 1 >= 0) || current < lines[i][j - 1]) &&
+        (!(j + 1 < line.length) || current < lines[i][j + 1])
+      ) {
+        risk += +current + 1;
       }
     }
   }
-  return surroundings;
+  console.log(risk);
 };
 
-const checkSurroundings = (i, j) => {
-  return (
-    parsedInput[i][j] ===
-    Math.min(parsedInput[i][j], ...surroundings(parsedInput, i, j))
-  );
+const floodFill = (i, j, map) => {
+  if (map[i][j] === 1) return 0; // comprobamos si ha sido visitado
+
+  map[i][j] = 1; // marcamos como visitado
+
+  let size = 1;
+
+  if (i - 1 >= 0) {
+    size += floodFill(i - 1, j, map);
+  }
+  if (i + 1 < map.length) {
+    size += floodFill(i + 1, j, map);
+  }
+  if (j - 1 >= 0) {
+    size += floodFill(i, j - 1, map);
+  }
+  if (j + 1 < map[i].length) {
+    size += floodFill(i, j + 1, map);
+  }
+
+  return size;
 };
 
-solvePart2();
+const solvePartTwo = () => {
+  const map = Array(lines.length)
+    .fill(0)
+    .map((x, i) =>
+      Array(lines[0].length)
+        .fill(0)
+        .map((x, j) => (lines[i][j] === '9' ? 1 : 0))
+    );
+
+  let bassins = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    for (let j = 0; j < line.length; j++) {
+      const current = line[j];
+      const size = floodFill(i, j, map);
+      size && bassins.push(size);
+    }
+  }
+  const result = calculateResult(bassins);
+  console.log(result);
+};
+
+const calculateResult = (bassins) => {
+  const threeLargest = bassins.sort((a, b) => b - a).slice(0, 3);
+  return threeLargest.reduce((acc, current) => {
+    acc = !acc ? current : acc * current;
+    return acc;
+  }, 0);
+};
+
+solvePartTwo();
